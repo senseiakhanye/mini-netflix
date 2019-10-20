@@ -39,23 +39,18 @@ export class MovieService {
     }
   ]
   movies: Imovie[]
-  filterString: Observable<string>;
-  private 
+  filterString$: Observable<string>;
+  private filterSubject: Subject<string>;
   changeDetect$: Observable<boolean>;
   private boolSubject: Subject<boolean>;
 
   constructor() {
-    this.boolSubject = new Subject<boolean>();
-    this.changeDetect$ = this.boolSubject.asObservable();
-  }
-
-  filterMovies() {
-    return (this.filterString !== "");
+    this.filterSubject = new Subject<string>();
+    this.filterString$ = this.filterSubject.asObservable();
   }
 
   setFilterText(searchString: string) {
-    this.filterString = searchString;
-    this.boolSubject.next((this.filterString === ""));
+    this.filterSubject.next(searchString);
   }
 
   getMovies(): Observable<Imovie[]> {
