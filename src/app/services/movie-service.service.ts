@@ -42,9 +42,18 @@ export class MovieService {
   constructor() { }
 
   movies: Imovie[]
+  filterString: string = "";
+
+  filterMovies() {
+    return (this.filterString !== "");
+  }
+
+  setFilterText(searchString: string) {
+    this.filterString = searchString;
+  }
 
   getMovies(): Observable<Imovie[]> {
-    return of(this.MOVIES)
+    return of(this.MOVIES);
   }
 
   getMovie(movieId: string): Imovie {

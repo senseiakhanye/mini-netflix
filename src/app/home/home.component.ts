@@ -10,16 +10,27 @@ import { Imovie } from '../model/imovie';
 export class HomeComponent implements OnInit {
 
   movies : Imovie[];
+  filteredMovies: Imovie[];
 
   constructor(private moviesService : MovieService) { }
 
   ngOnInit() {
     this.moviesService.getMovies().subscribe( (data) => {
       this.movies = data;
+      if (this.moviesService.filterMovies()) {
+        console.log("filter movies");
+        this.filteredMovies = this.movies.filter( (movie) => {
+          return movie.title.toLowerCase().includes(this.moviesService.filterString.toLowerCase());
+        });
+        return ;
+      }
+      console.log("No filter required");
+      this.filteredMovies = this.movies.splice(0);
     })
   }
 
   openMovie(movie : Imovie) {
     console.log(movie);
   }
+
 }

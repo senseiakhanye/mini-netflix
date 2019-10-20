@@ -1,5 +1,5 @@
 <div movie-div>
-  <div *ngFor="let movie of movies" one-movie [routerLink]="['/movies', movie.guid]">
+  <div *ngFor="let movie of filteredMovies" one-movie [routerLink]="['/movies', movie.guid]">
       <h3>{{movie.title}}</h3>
       <img src="{{movie.image}}" >
       <span>{{movie.year}}</span>

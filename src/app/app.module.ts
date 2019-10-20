@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MovieItemComponent } from './movie-item/movie-item.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MovieItemComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
