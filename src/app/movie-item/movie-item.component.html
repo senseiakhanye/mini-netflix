@@ -1,0 +1,21 @@
+<div movie-div *ngIf="ready">
+  <div movie-details>
+    <div class="movie-detail">
+      <div class="movie-title">
+        Title
+      </div>
+      <div class="movie-description">
+        {{movie.title}}
+      </div>
+    </div>
+    <div class="movie-detail">
+        <div class="movie-title">
+          Year
+        </div>
+        <div class="movie-description">
+          {{movie.year}}
+        </div>
+      </div>
+  </div>
+  <img src="{{movie.image}}" >
+</div>

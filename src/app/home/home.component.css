@@ -1,0 +1,21 @@
+[movie-div] {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+[one-movie] {
+    flex-basis: 350px;
+    text-align: center;
+    cursor: pointer;
+}
+
+[one-movie] h3 {
+    max-height: 20px;
+    overflow: hidden;
+}
+
+[one-movie] img {
+    width: 100%;
+}
