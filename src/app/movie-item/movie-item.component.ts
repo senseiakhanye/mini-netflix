@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../services/movie-service.service';
 import { Imovie } from '../model/imovie';
 import { ActivatedRoute, Router } from '@angular/router';
-import { isComponentView } from '@angular/core/src/view/util';
 
 @Component({
   selector: 'app-movie-item',
@@ -28,6 +27,9 @@ export class MovieItemComponent implements OnInit {
     }
     this.ready = true;
     this.movie = this.movieService.getMovie(this.guid);
-    console.log(this.movie);
+  }
+
+  goBack() {
+    this.navigator.navigate(['/movies']);
   }
 }

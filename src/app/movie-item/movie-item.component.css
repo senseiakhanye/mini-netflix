@@ -1,0 +1,18 @@
+[movie-div] {
+    display: flex;
+}
+
+[movie-div] img {
+    flex: 1;
+    width: 100%;
+}
+
+[movie-details] {
+    flex: 1;
+}
+
+.backBtn {
+    width: 100%;
+    text-align: center;
+    margin: 25px 0;
+}
