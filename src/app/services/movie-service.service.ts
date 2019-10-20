@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Imovie } from '../model/imovie';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,11 +38,16 @@ export class MovieService {
       image: "https://peruzal-parse-media.s3.amazonaws.com/7a53a11c-9dae-48b4-ac36-38916bcf0096_2.jpg"
     }
   ]
-
-  constructor() { }
-
   movies: Imovie[]
-  filterString: string = "";
+  filterString: Observable<string>;
+  private 
+  changeDetect$: Observable<boolean>;
+  private boolSubject: Subject<boolean>;
+
+  constructor() {
+    this.boolSubject = new Subject<boolean>();
+    this.changeDetect$ = this.boolSubject.asObservable();
+  }
 
   filterMovies() {
     return (this.filterString !== "");
@@ -50,6 +55,7 @@ export class MovieService {
 
   setFilterText(searchString: string) {
     this.filterString = searchString;
+    this.boolSubject.next((this.filterString === ""));
   }
 
   getMovies(): Observable<Imovie[]> {

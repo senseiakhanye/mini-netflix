@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { MovieService } from '../services/movie-service.service';
 import { Imovie } from '../model/imovie';
 
@@ -7,12 +7,18 @@ import { Imovie } from '../model/imovie';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnChanges {
 
   movies : Imovie[];
   filteredMovies: Imovie[];
+  changeDetected: boolean;
 
-  constructor(private moviesService : MovieService) { }
+  constructor(private moviesService : MovieService) {
+    moviesService.changeDetect$.subscribe( (newBool: boolean) => {
+      console.log("reading data");
+      this.changeDetected = newBool;
+    });
+  }
 
   ngOnInit() {
     this.moviesService.getMovies().subscribe( (data) => {
@@ -25,8 +31,13 @@ export class HomeComponent implements OnInit {
         return ;
       }
       console.log("No filter required");
-      this.filteredMovies = this.movies.splice(0);
+      this.filteredMovies = this.movies.slice();
+      console.log(this.filteredMovies);
     })
+  }
+
+  ngOnChanges() {
+    console.log("Change detected");
   }
 
   openMovie(movie : Imovie) {

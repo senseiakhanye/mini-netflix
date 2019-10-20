@@ -11,7 +11,6 @@ export class SearchService {
 
   setFilterText(txt: string) {
     this.movieService.setFilterText(txt);
-    
   }
 
 }
