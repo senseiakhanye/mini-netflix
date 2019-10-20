@@ -41,8 +41,6 @@ export class MovieService {
   movies: Imovie[]
   filterString$: Observable<string>;
   private filterSubject: Subject<string>;
-  changeDetect$: Observable<boolean>;
-  private boolSubject: Subject<boolean>;
 
   constructor() {
     this.filterSubject = new Subject<string>();

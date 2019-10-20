@@ -11,34 +11,30 @@ export class HomeComponent implements OnInit, OnChanges {
 
   movies : Imovie[];
   filteredMovies: Imovie[];
-  filterdString: string;
+  filterdString: string = "";
 
   constructor(private moviesService : MovieService) {
-    moviesService.changeDetect$.subscribe( (newString: string) => {
-      console.log("reading data");
+    moviesService.filterString$.subscribe( (newString: string) => {
       this.filterdString = newString;
+      this.filterMovies();
     });
+  }
+
+  filterMovies() {
+    if (this.filterdString !== "") {
+      this.filteredMovies = this.movies.filter( (movie) => {
+        return (movie.title.toLowerCase().includes(this.filterdString.toLowerCase()));
+      });
+      return ;
+    }
+    this.filteredMovies = this.movies.slice();
   }
 
   ngOnInit() {
     this.moviesService.getMovies().subscribe( (data) => {
       this.movies = data;
-      this.filteredMovies.slice();
-      // if (this.moviesService.filterMovies()) {
-      //   console.log("filter movies");
-      //   this.filteredMovies = this.movies.filter( (movie) => {
-      //     return movie.title.toLowerCase().includes(this.moviesService.filterString.toLowerCase());
-      //   });
-      //   return ;
-      // }
-      // console.log("No filter required");
-      // this.filteredMovies = this.movies.slice();
-      // console.log(this.filteredMovies);
+      this.filterMovies();
     })
-  }
-
-  ngOnChanges() {
-    console.log("Change detected");
   }
 
   openMovie(movie : Imovie) {
