@@ -54,6 +54,6 @@ export class HomeComponent implements OnInit {
   }
 
   likeVieo(movie: Imovie) {
-    movie.favourite = !movie.favourite;
+    this.moviesService.toggleLikeMovie(movie);    
   }
 }

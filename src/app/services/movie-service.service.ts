@@ -55,6 +55,10 @@ export class MovieService {
     this.filterString$ = this.filterSubject.asObservable();
     this.favouriteSubject = new Subject<boolean>();
     this.showFavourite$ = this.favouriteSubject.asObservable();
+    let localMovies = sessionStorage.getItem("movies");
+    if (localMovies === undefined || localMovies === null) {
+      sessionStorage.setItem("movies", JSON.stringify(this.MOVIES));
+    }
   }
 
   setFilterText(searchString: string) {
@@ -67,10 +71,16 @@ export class MovieService {
   }
 
   getMovies(): Observable<Imovie[]> {
-    return of(this.MOVIES);
+    this.movies = JSON.parse(sessionStorage.getItem("movies"));
+    return of(this.movies);
   }
 
   getMovie(movieId: string): Imovie {
-    return this.MOVIES.find( movie => movie.guid === movieId);
+    return this.movies.find( movie => movie.guid === movieId);
+  }
+
+  toggleLikeMovie(movie: Imovie) {
+    movie.favourite = !movie.favourite;
+    sessionStorage.setItem("movies", JSON.stringify(this.movies));
   }
 }
