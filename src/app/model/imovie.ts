@@ -14,4 +14,5 @@ export interface Imovie {
     language?: string;
     country?: string;
     awards?: string[];
+    favourite: boolean;
 }

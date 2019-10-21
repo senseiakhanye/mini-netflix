@@ -1,7 +1,8 @@
 <div movie-div>
-  <div *ngFor="let movie of filteredMovies" one-movie [routerLink]="['/movies', movie.guid]">
-      <h3>{{movie.title}}</h3>
-      <img src="{{movie.image}}" >
-      <span>{{movie.year}}</span>
+  <div *ngFor="let movie of filteredMovies" one-movie >
+      <h3 [routerLink]="['/movies', movie.guid]">{{movie.title}}</h3>
+      <img [routerLink]="['/movies', movie.guid]" src="{{movie.image}}" >
+      <span [routerLink]="['/movies', movie.guid]">{{movie.year}}</span>
+      <button (click)="likeVieo(movie)"><span *ngIf="movie.favourite">Unlike</span><span *ngIf="!movie.favourite">Like</span></button>
   </div>
 </div>

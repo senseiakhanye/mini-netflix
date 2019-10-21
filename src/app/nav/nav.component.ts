@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../services/search.service';
+import { MovieService } from '../services/movie-service.service';
 
 @Component({
   selector: 'app-nav',
@@ -8,14 +9,18 @@ import { SearchService } from '../services/search.service';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private searchService: SearchService) { }
+  constructor(private searchService: SearchService, private movieService: MovieService) { }
 
   ngOnInit() {
   }
 
   searchMovies(txtSearch: any) {
     this.searchService.setFilterText(txtSearch);
-    console.log(txtSearch);
   }
 
+  showFavourites() {
+    this.movieService.toggleFavourite();
+  }
+
+  
 }
