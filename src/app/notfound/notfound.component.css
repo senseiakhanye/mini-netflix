@@ -1,0 +1,11 @@
+.notfound {
+  width: 100%;
+  color: white;
+  text-align: center;
+  margin: 25px 0;
+}
+
+
+.notfoundmessage {
+  font-size: 5em;
+}
