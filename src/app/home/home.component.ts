@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   filteredMovies: Imovie[];
   filterdString: string = "";
   favourites: boolean = false;
+  contentFound: boolean = false;
 
   constructor(private moviesService : MovieService) {
     moviesService.filterString$.subscribe( (newString: string) => {
@@ -23,26 +24,34 @@ export class HomeComponent implements OnInit {
       this.favourites = showFavourite;
       this.filterMovies();
     })
+
   }
 
   filterMovies() {
     if (this.filterdString !== "") {
       if (this.favourites) {
-        return this.filteredMovies = this.movies.filter( (movie) => {
+        this.filteredMovies = this.movies.filter( (movie) => {
           return (movie.title.toLowerCase().includes(this.filterdString.toLowerCase()) && movie.favourite);
-        })
+        });
+        this.contentFound = (this.filteredMovies.length > 0);
+        return this.filteredMovies;
       }
-      return this.filteredMovies = this.movies.filter( (movie) => {
+      this.filteredMovies = this.movies.filter( (movie) => {
           return (movie.title.toLowerCase().includes(this.filterdString.toLowerCase()));
         });
+      this.contentFound = (this.filteredMovies.length > 0);
+      return this.filteredMovies;
     }
     if (!this.favourites) {
+      this.contentFound = this.movies.length > 0;
       return this.filteredMovies = this.movies;
     }
     this.filteredMovies = this.movies.filter( (movie) => movie.favourite );
+    this.contentFound = this.filteredMovies.length > 0;
   }
 
   ngOnInit() {
+    console.log("On init called");
     this.moviesService.getMovies().subscribe( (data) => {
       this.movies = data;
       this.filterMovies();
@@ -53,7 +62,9 @@ export class HomeComponent implements OnInit {
     console.log(movie);
   }
 
-  likeVieo(movie: Imovie) {
-    this.moviesService.toggleLikeMovie(movie);    
+  likeVieo(movie: Imovie)  {
+    this.moviesService.toggleLikeMovie(movie).subscribe( (success) => {
+      this.filterMovies();
+    });
   }
 }

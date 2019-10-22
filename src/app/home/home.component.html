@@ -1,4 +1,4 @@
-<div movie-div>
+<div movie-div *ngIf="contentFound">
   <div *ngFor="let movie of filteredMovies" one-movie >
       <h3 [routerLink]="['/movies', movie.guid]">{{movie.title}}</h3>
       <img [routerLink]="['/movies', movie.guid]" src="{{movie.image}}" >
@@ -6,3 +6,4 @@
       <button (click)="likeVieo(movie)"><span *ngIf="movie.favourite">Unlike</span><span *ngIf="!movie.favourite">Like</span></button>
   </div>
 </div>
+<div class="no-content" *ngIf="!contentFound"><strong>NO CONTENT</strong></div>

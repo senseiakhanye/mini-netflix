@@ -79,8 +79,14 @@ export class MovieService {
     return this.movies.find( movie => movie.guid === movieId);
   }
 
-  toggleLikeMovie(movie: Imovie) {
+  toggleLikeMovie(movie: Imovie): Observable<boolean> {
     movie.favourite = !movie.favourite;
     sessionStorage.setItem("movies", JSON.stringify(this.movies));
+    return of(true);
+  }
+
+  showAll() {
+    this.favouriteStatus = false;
+    this.favouriteSubject.next(this.favouriteStatus);
   }
 }

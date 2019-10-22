@@ -22,8 +22,6 @@ export class MovieItemComponent implements OnInit {
 
   ngOnInit() {
     this.guid = this.route.snapshot.params['movieid'];
-    console.log(this.guid);
-    console.log(this.movieService.getMovie(this.guid));
     if ((this.tempMovie = this.movieService.getMovie(this.guid)) === undefined) {
       return this.navigator.navigate(['/notfound']);
     }

@@ -1,21 +1,30 @@
 [movie-div] {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     align-items: center;
+    color: white;
 }
 
 [one-movie] {
     flex-basis: 350px;
     text-align: center;
     cursor: pointer;
+    margin: 10px 5px;
 }
 
 [one-movie] h3 {
-    max-height: 20px;
+    max-height: 25px;
     overflow: hidden;
+    margin-bottom: 5px;
 }
 
 [one-movie] img {
     width: 100%;
+}
+
+.no-content {
+    display: 100%;
+    text-align: center;
+    color: white;
 }

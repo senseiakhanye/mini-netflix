@@ -9,7 +9,15 @@ import { MovieService } from '../services/movie-service.service';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private searchService: SearchService, private movieService: MovieService) { }
+  constructor(
+    private searchService: SearchService, 
+    private movieService: MovieService) { 
+      movieService.showFavourite$.subscribe( (data) => {
+        this.homeActive = data;
+      })
+    }
+
+  homeActive: boolean = false;
 
   ngOnInit() {
   }
@@ -22,5 +30,8 @@ export class NavComponent implements OnInit {
     this.movieService.toggleFavourite();
   }
 
+  showAll() {
+    this.movieService.showAll();
+  }
   
 }
